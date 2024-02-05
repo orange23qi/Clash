@@ -448,6 +448,7 @@ rule-providers:
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/LocalAreaNetwork.list"
     path: ./ruleset/LocalAreaNetwork-domain.yaml
     interval: 86400
+
   openai-domain:
     type: http
     behavior: domain
@@ -459,6 +460,13 @@ rule-providers:
     behavior: ipcidr
     url: "https://raw.githubusercontent.com/monlor/openclash-rules/master/openai.ini"
     path: ./ruleset/openai-ipcidr.yaml
+    interval: 86400
+
+  ProxyGFWlist-domain:
+    type: http
+    behavior: domain
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list"
+    path: ./ruleset/ProxyGFWlist-domain.yaml
     interval: 86400
 
 # clash.premium
@@ -507,5 +515,6 @@ rules:
   - RULE-SET,LocalAreaNetwork-domain,🎯 Mainland
   - RULE-SET,openai-domain,💬 OpenAI
   - RULE-SET,openai-ipcidr,💬 OpenAI
+  - RULE-SET,ProxyGFWlist-domain,🚀 Global
   - GEOIP,CN,🎯 Mainland
   - MATCH,🐟 Final
