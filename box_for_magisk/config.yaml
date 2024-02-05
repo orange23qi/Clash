@@ -469,6 +469,13 @@ rule-providers:
     path: ./ruleset/ProxyGFWlist-domain.yaml
     interval: 86400
 
+  google:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/google.txt"
+    path: ./ruleset/google.yaml
+    interval: 86400
+
 # clash.premium
 # script:
   # shortcuts:
