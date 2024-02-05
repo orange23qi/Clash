@@ -494,13 +494,6 @@ rule-providers:
     path: ./ruleset/BanEasyPrivacy.yaml
     interval: 86400
 
-  BanProgramAD:
-    type: http
-    behavior: classical 
-    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/BanProgramAD.yaml"
-    path: ./ruleset/BanProgramAD.yaml
-    interval: 86400
-
   OpenAi:
     type: http
     behavior: classical 
@@ -509,7 +502,8 @@ rule-providers:
     interval: 86400
 
   Claude:
-    type: http    
+    type: http
+    behavior: classical 
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Claude.yaml"
     path: ./ruleset/Claude.yaml
     interval: 86400    
@@ -740,7 +734,7 @@ rules:
   - RULE-SET,OpenAi,💬 OpenAI
   - RULE-SET,Claude,💬 Claude
   # - RULE-SET,paypal,💰 PayPal,https://raw.githubusercontent.com/monlor/openclash-rules/master/paypal.ini
-  - DOMAIN-SUFFIX,PROCESS-NAME,com.paypal.android.p2pmobile,💰 PayPal
+  - PROCESS-NAME,com.paypal.android.p2pmobile,💰 PayPal
   - DOMAIN-SUFFIX,account-paypal.info,💰 PayPal
   - DOMAIN-SUFFIX,account-paypal.net,💰 PayPal
   - DOMAIN-SUFFIX,account-paypal.org,💰 PayPal
@@ -987,7 +981,7 @@ rules:
   - DOMAIN-SUFFIX,xoom.net.cn,💰 PayPal
   - DOMAIN-SUFFIX,xoom.us,💰 PayPal
   - DOMAIN-SUFFIX,xoomcom.com,💰 PayPal
-  - DOMAIN-SUFFIX,DOMAIN-KEYWORD,paypal,💰 PayPal
+  - DOMAIN-KEYWORD,paypal,💰 PayPal
   # - RULE-SET,wallet,💰 PayPal,https://raw.githubusercontent.com/monlor/openclash-rules/master/wallet.ini
   # - RULE-SET,UnitedStates,🇺🇸 US.Services,https://raw.githubusercontent.com/monlor/openclash-rules/master/country/UnitedStates.ini
   - DOMAIN-SUFFIX,t-mobile.com,🇺🇸 US.Services
