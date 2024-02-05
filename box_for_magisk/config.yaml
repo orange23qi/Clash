@@ -207,23 +207,6 @@ dns:
 
 proxies:
 proxy-groups:
-  # - name: "PROXY"
-  #   type: select
-  #   use:
-  #     - "provide"
-  #   proxies:
-  #     - "FALLBACK"
-  #     - "URL-TEST"
-
-  # - name: "FALLBACK"
-  #   type: fallback
-  #   use:
-  #     - "provide"
-
-  # - name: "URL-TEST"
-  #   type: url-test
-  #   use:
-  #     - "provide"
   - name: 🇭🇰 Auto-HK
     type: url-test
     url: http://www.gstatic.com/generate_204
@@ -398,17 +381,6 @@ proxy-groups:
       - 🇺🇲 Auto-US
 
 proxy-providers:
-#   "provide":
-#     type: file
-#     path: ./provide/subscription.yaml
-#     # filter: 'xxx' # Supports regular expressions to filter by node name
-#     # exclude-filter: 'ctb' # Supports regular expressions to exclude based on node name
-#     # exclude-type: 'ss|http' # Does not support regular expressions, separated by '|', excluded by node type
-#     health-check:
-#       enable: true
-#       url: http://www.gstatic.com/generate_204
-#       interval: 3600
-
   "Provide-HK":
     type: file
     path: ./provide/subscription.yaml
@@ -477,13 +449,20 @@ proxy-providers:
       # url: http://www.gstatic.com/generate_204
       # interval: 3600
 
-# rule-providers:
+rule-providers:
   # block:
     # type: http
     # behavior: domain
     # url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt"
     # path: ./ruleset/block.yaml
     # interval: 86400
+
+  openai:
+    type: http
+    # behavior: domain
+    url: "https://raw.githubusercontent.com/monlor/openclash-rules/master/openai.ini"
+    path: ./ruleset/openai.yaml
+    interval: 86400
 
 # clash.premium
 # script:
@@ -63005,5 +62984,6 @@ rules:
   - PROCESS-NAME,DownloadService.exe,🎯 Mainland
   - PROCESS-NAME,Weiyun.exe,🎯 Mainland
   - PROCESS-NAME,baidunetdisk.exe,🎯 Mainland
+  - RULE-SET,openai,💬 OpenAI
   - GEOIP,CN,🎯 Mainland
   - MATCH,🐟 Final
