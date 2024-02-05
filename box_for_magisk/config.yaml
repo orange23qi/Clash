@@ -1036,6 +1036,9 @@ rules:
   - RULE-SET,Sony,🎮 Game
   - RULE-SET,Steam,🎮 Game
   - RULE-SET,Nintendo,🎮 Game
+  # https://www.techkoala.net/google_one_vpn/
+  - DOMAIN-SUFFIX,cloud.cupronickel.goog,📢 Google
+  - DOMAIN-SUFFIX,googleapis.com,📢 Google
   - RULE-SET,ProxyMedia,🌍 GlobalMedia
   - RULE-SET,ProxyGFWlist,🚀 Global
   - RULE-SET,ChinaIp,🎯 Mainland
