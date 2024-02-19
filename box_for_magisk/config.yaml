@@ -771,6 +771,8 @@ rules:
   - RULE-SET,Sony,Game
   - RULE-SET,Steam,Game
   - RULE-SET,Nintendo,Game
+  - DOMAIN-SUFFIX,nianticstatic.com,Game
+  - DOMAIN-SUFFIX,nianticlabs.com,Game
   # https://www.techkoala.net/google_one_vpn/
   - DOMAIN-SUFFIX,cloud.cupronickel.goog,Google
   - DOMAIN-SUFFIX,googleapis.com,Google
