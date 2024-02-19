@@ -295,8 +295,11 @@ proxy-groups:
   - name: Google
     type: select
     proxies:
-      - 🇭🇰 Auto-HK
       - 🇺🇲 Auto-US
+      - 🇭🇰 Auto-HK
+      - 🇨🇳 Auto-TW
+      - 🇸🇬 Auto-SG
+      - 🇯🇵 Auto-JP
   - name: YouTube
     type: select
     proxies:
