@@ -778,7 +778,8 @@ rules:
   - DOMAIN-SUFFIX,nianticlabs.com,Game
   # https://www.techkoala.net/google_one_vpn/
   - DOMAIN-SUFFIX,cloud.cupronickel.goog,Google
-  - DOMAIN-SUFFIX,googleapis.com,Google
+  - DOMAIN-KEYWORD,googleapis,Google
+  - DOMAIN-KEYWORD,g-tun,Google
   - RULE-SET,ProxyMedia,GlobalMedia
   - RULE-SET,ProxyGFWlist,Global
   - RULE-SET,ChinaIp,Mainland
