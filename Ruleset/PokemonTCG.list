@@ -1,0 +1,15 @@
+# Pokémon TCG Pocket Rules
+
+## Confirmed First-Party Domains
+DOMAIN-SUFFIX,pokemon.com
+
+## Inferred Third-Party BaaS/Cloud Domains
+DOMAIN-KEYWORD,googleapis
+DOMAIN-SUFFIX,ggpht.com
+DOMAIN-KEYWORD,amazonaws
+
+## Confirmed First-Party IP Ranges (AS54128)
+IP-CIDR,213.86.124.0/24
+IP-CIDR,50.147.226.0/24
+IP-CIDR,50.218.80.0/24
+IP-CIDR,76.191.87.0/24

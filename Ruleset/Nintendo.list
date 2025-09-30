@@ -1,0 +1,18 @@
+# Fire Emblem Heroes & Nintendo Network Rules
+
+## Domain-based rules (Primary Layer)
+DOMAIN-SUFFIX,nintendo.com
+DOMAIN-SUFFIX,nintendo.net
+DOMAIN-SUFFIX,nintendowifi.net
+DOMAIN-SUFFIX,nintendo.cn
+DOMAIN-SUFFIX,nintendo.eu
+DOMAIN-SUFFIX,nintendo.de
+DOMAIN,e0d67c509fb203858ebcb2fe3f88c2aa.baas.nintendo.com
+
+## IP-based rules (Secondary Layer - Catch-all for AS11278)
+IP-CIDR,192.159.188.0/22
+IP-CIDR,192.159.184.0/23
+IP-CIDR,173.226.198.0/24
+IP-CIDR,205.166.76.0/24
+IP-CIDR,192.195.204.0/24
+IP-CIDR,207.108.201.0/24
