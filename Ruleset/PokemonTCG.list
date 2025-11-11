@@ -1,21 +1,12 @@
-# Pokémon TCG Pocket Rules
-
-## Confirmed First-Party Domains
-DOMAIN-SUFFIX,pokemon.com
-
-## Inferred Third-Party BaaS/Cloud Domains
+DOMAIN,accounts.nintendo.com
 DOMAIN-KEYWORD,googleapis
 DOMAIN-KEYWORD,amazonaws
+DOMAIN-SUFFIX,pokemon.com
 DOMAIN-SUFFIX,ggpht.com
-
-## Confirmed First-Party IP Ranges (AS54128)
+DOMAIN-SUFFIX,app-41283.com
+DOMAIN-SUFFIX,cdn-dena.com
+DOMAIN-SUFFIX,akamaized.net
 IP-CIDR,213.86.124.0/24
 IP-CIDR,50.147.226.0/24
 IP-CIDR,50.218.80.0/24
 IP-CIDR,76.191.87.0/24
-
-# Pokémon TCG Pocket 专属流量代理规则
-DOMAIN-SUFFIX,app-41283.com
-DOMAIN-SUFFIX,cdn-dena.com
-DOMAIN-SUFFIX,akamaized.net
-DOMAIN,accounts.nintendo.com
