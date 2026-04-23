@@ -1,5 +1,4 @@
 DOMAIN-SUFFIX,pokemongo.com
 DOMAIN-SUFFIX,pokemongolive.com
-DOMAIN,pgorelease.nianticlabs.com
-DOMAIN,pgorelease-assets.nianticstatic.com
-DOMAIN,support.pokemongo.nianticlabs.com
+DOMAIN-SUFFIX,nianticlabs.com
+DOMAIN-SUFFIX,nianticstatic.com
