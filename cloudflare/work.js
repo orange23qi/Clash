@@ -87,7 +87,8 @@ const RULE_MAP = {
 
   // Shardowrocket Rule
   "shardowrocket_rule.conf": "https://raw.githubusercontent.com/orange23qi/Clash/refs/heads/main/shadowrocket/rule.conf",
-  "shardowrocket_local_rule.conf": "https://raw.githubusercontent.com/orange23qi/Clash/refs/heads/main/shadowrocket/local_rule.conf"
+  "shardowrocket_local_rule.conf": "https://raw.githubusercontent.com/orange23qi/Clash/refs/heads/main/shadowrocket/local_rule.conf",
+  "shardowrocket_itools.conf": "https://raw.githubusercontent.com/orange23qi/Clash/refs/heads/main/shadowrocket/itools.conf"
 };
 
 // =======================================================
