@@ -23,7 +23,7 @@ const RULE_MAP = {
   "AI.list": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/AI.list",
 
   // Apple Intelligence
-  "AppleIntelligence.list": "https://raw.githubusercontent.com/xpdigital/Apple-Rule/refs/heads/main/Apple-US.list",
+  "AppleIntelligence.list": "https://raw.githubusercontent.com/orange23qi/Clash/refs/heads/main/ruleset/AppleIntelligence.list",
 
   // 支付 / 购物
   "PayPal.list": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/PayPal/PayPal.list",
