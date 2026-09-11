@@ -1,0 +1,436 @@
+# Stash 原生拆分配置；不再交给 subconverter 合并规则。
+# 使用前：只在自己的本地副本替换下方订阅 URL，勿提交带 token 的链接。
+# 订阅响应必须是包含 proxies: 的 YAML；其他格式需先仅转换节点。
+# 节点每小时更新，规则每天更新；策略组和匹配顺序在本文件维护。
+# 原 rule.ini 保留。规则地址沿用线上版本（可能与 ruleset/ 本地内容不同）。
+# Stash 空代理集/空策略组会按 DIRECT 处理；导入后务必检查各地区有节点。
+# 地区筛选保留原有正则（含负向前瞻），需在实际 Stash 版本确认筛选结果。
+# Stash 节点测速结果跨组共享，原 Smart 组不代表流媒体解锁检测。
+mode: rule
+log-level: info
+ipv6: true
+
+# 按节点名称筛选：sg 新加坡、hk 香港、us 美国、tw 台湾、jp 日本。
+# game 为游戏专线；media 保留原流媒体组较窄的地区筛选条件。
+proxy-providers:
+  subscription-sg:
+    url: &subscription-url "https://example.invalid/REPLACE_WITH_YOUR_STASH_SUBSCRIPTION"
+    interval: 3600
+    filter: "^(?!.*(Game|游戏|IPLC)).*(新加坡|坡|狮城|SG|Singapore).*"
+  subscription-game:
+    url: *subscription-url
+    interval: 3600
+    filter: "(Game|游戏|IPLC)"
+  subscription-hk:
+    url: *subscription-url
+    interval: 3600
+    filter: "^(?!.*(Game|游戏|IPLC)).*(港|HK|hk|Hong Kong|HongKong|hongkong).*"
+  subscription-us:
+    url: *subscription-url
+    interval: 3600
+    filter: "^(?!.*(Game|游戏|IPLC)).*(美国|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States).*"
+  subscription-tw:
+    url: *subscription-url
+    interval: 3600
+    filter: "^(?!.*(Game|游戏|IPLC)).*(台|新北|彰化|TW|Taiwan).*"
+  subscription-jp:
+    url: *subscription-url
+    interval: 3600
+    filter: "^(?!.*(Game|游戏|IPLC)).*(日本|川日|东京|大阪|泉日|埼玉|沪日|深日|[^-]日|JP|Japan).*"
+  subscription-hk-media:
+    url: *subscription-url
+    interval: 3600
+    filter: "^(?!.*(Game|游戏|IPLC)).*(港|HK|Hong Kong).*"
+  subscription-tw-media:
+    url: *subscription-url
+    interval: 3600
+    filter: "^(?!.*(Game|游戏|IPLC)).*(台|TW|Taiwan).*"
+
+proxy-groups:
+  - name: "🚀 Global"
+    type: select
+    proxies:
+      - "🇭🇰 Auto-HK"
+      - "🇨🇳 Auto-TW"
+      - "🇺🇲 Auto-US"
+      - "🇯🇵 Auto-JP"
+      - "🇸🇬 Auto-SG"
+      - "DIRECT"
+  - name: "💬 Intelligence"
+    type: select
+    proxies:
+      - "🇸🇬 Auto-SG"
+    use:
+      - subscription-sg
+      # 加入美国单节点，便于固定出口对比“地区不可用”；默认仍为 Auto-SG。
+      - subscription-us
+  - name: "🏃 Apple Fitness"
+    type: select
+    proxies:
+      - "🇭🇰 Auto-HK"
+      - "🇸🇬 Auto-SG"
+      - "🇺🇲 Auto-US"
+      - "🇯🇵 Auto-JP"
+      - "🇨🇳 Auto-TW"
+      - "DIRECT"
+  - name: "📺 Apple TV"
+    type: select
+    proxies:
+      - "🇺🇲 Auto-US"
+      - "🇯🇵 Auto-JP"
+      - "🇭🇰 Auto-HK"
+      - "🇸🇬 Auto-SG"
+  - name: "🍎 Apple"
+    type: select
+    proxies:
+      - "DIRECT"
+      - "🇭🇰 Auto-HK"
+      - "🇸🇬 Auto-SG"
+      - "🇯🇵 Auto-JP"
+      - "🇺🇲 Auto-US"
+  - name: "🌍 Google"
+    type: select
+    proxies:
+      - "🇭🇰 Auto-HK"
+      - "🇨🇳 Auto-TW"
+      - "🇺🇲 Auto-US"
+      - "🇯🇵 Auto-JP"
+      - "🇸🇬 Auto-SG"
+  - name: "🎮 Game"
+    type: select
+    proxies:
+      - "🚀 Global"
+      - "DIRECT"
+    use:
+      - subscription-game
+  - name: "💰 PayPal"
+    type: select
+    proxies:
+      - "🇺🇲 Auto-US"
+      - "DIRECT"
+  - name: "🛍️ Amazon"
+    type: select
+    proxies:
+      - "🇺🇲 Auto-US"
+      - "🇯🇵 Auto-JP"
+      - "DIRECT"
+  - name: "📺 YouTube"
+    type: select
+    proxies:
+      - "📺 YouTube-Smart"
+      - "🚀 Global"
+  - name: "📺 Netflix"
+    type: select
+    proxies:
+      - "📺 Netflix-Smart"
+      - "🚀 Global"
+  - name: "📺 DisneyPlus"
+    type: select
+    proxies:
+      - "📺 DisneyPlus-Smart"
+      - "🚀 Global"
+  - name: "🎯 Mainland"
+    type: select
+    proxies:
+      - "DIRECT"
+      - "🚀 Global"
+  - name: "🛑 Advertising"
+    type: select
+    proxies:
+      - "REJECT"
+      - "DIRECT"
+  - name: "🐟 Final"
+    type: select
+    proxies:
+      - "🚀 Global"
+      - "DIRECT"
+  - name: "🇭🇰 Auto-HK"
+    type: url-test
+    use:
+      - subscription-hk
+    interval: 300
+    lazy: true
+  - name: "🇺🇲 Auto-US"
+    type: url-test
+    use:
+      - subscription-us
+    interval: 300
+    lazy: true
+  - name: "🇨🇳 Auto-TW"
+    type: url-test
+    use:
+      - subscription-tw
+    interval: 300
+    lazy: true
+  - name: "🇯🇵 Auto-JP"
+    type: url-test
+    use:
+      - subscription-jp
+    interval: 300
+    lazy: true
+  - name: "🇸🇬 Auto-SG"
+    type: url-test
+    use:
+      - subscription-sg
+    interval: 300
+    lazy: true
+  - name: "📺 YouTube-Smart"
+    type: url-test
+    use:
+      - subscription-hk-media
+    interval: 1800
+    lazy: true
+  - name: "📺 Netflix-Smart"
+    type: url-test
+    use:
+      - subscription-hk-media
+    interval: 1800
+    lazy: true
+  - name: "📺 DisneyPlus-Smart"
+    type: url-test
+    use:
+      - subscription-tw-media
+    interval: 1800
+    lazy: true
+
+rule-providers:
+  LocalAreaNetwork:
+    behavior: classical
+    format: text
+    url: "https://clashrules.chenzisu.workers.dev/LocalAreaNetwork.list"
+    interval: 86400
+  UnBan:
+    behavior: classical
+    format: text
+    url: "https://clashrules.chenzisu.workers.dev/UnBan.list"
+    interval: 86400
+  BanAD:
+    behavior: classical
+    format: text
+    url: "https://clashrules.chenzisu.workers.dev/BanAD.list"
+    interval: 86400
+  BanProgramAD:
+    behavior: classical
+    format: text
+    url: "https://clashrules.chenzisu.workers.dev/BanProgramAD.list"
+    interval: 86400
+  BanEasyList:
+    behavior: classical
+    format: text
+    url: "https://clashrules.chenzisu.workers.dev/BanEasyList.list"
+    interval: 86400
+  BanEasyListChina:
+    behavior: classical
+    format: text
+    url: "https://clashrules.chenzisu.workers.dev/BanEasyListChina.list"
+    interval: 86400
+  ChinaMedia:
+    behavior: classical
+    format: text
+    url: "https://clashrules.chenzisu.workers.dev/ChinaMedia.list"
+    interval: 86400
+  AI:
+    behavior: classical
+    format: text
+    url: "https://clashrules.chenzisu.workers.dev/AI.list"
+    interval: 86400
+  AppleIntelligence:
+    behavior: classical
+    format: text
+    url: "https://clashrules.chenzisu.workers.dev/AppleIntelligence.list"
+    interval: 86400
+  PayPal:
+    behavior: classical
+    format: text
+    url: "https://clashrules.chenzisu.workers.dev/PayPal.list"
+    interval: 86400
+  Amazon:
+    behavior: classical
+    format: text
+    url: "https://clashrules.chenzisu.workers.dev/Amazon.list"
+    interval: 86400
+  YouTube:
+    behavior: classical
+    format: text
+    url: "https://clashrules.chenzisu.workers.dev/YouTube.list"
+    interval: 86400
+  DisneyPlus:
+    behavior: classical
+    format: text
+    url: "https://clashrules.chenzisu.workers.dev/DisneyPlus.list"
+    interval: 86400
+  Netflix:
+    behavior: classical
+    format: text
+    url: "https://clashrules.chenzisu.workers.dev/Netflix.list"
+    interval: 86400
+  AppleFitness:
+    behavior: classical
+    format: text
+    url: "https://clashrules.chenzisu.workers.dev/AppleFitness.list"
+    interval: 86400
+  MyAppleTV:
+    behavior: classical
+    format: text
+    url: "https://clashrules.chenzisu.workers.dev/MyAppleTV.list"
+    interval: 86400
+  AppleTV:
+    behavior: classical
+    format: text
+    url: "https://clashrules.chenzisu.workers.dev/AppleTV.list"
+    interval: 86400
+  Apple:
+    behavior: classical
+    format: text
+    url: "https://clashrules.chenzisu.workers.dev/Apple.list"
+    interval: 86400
+  GoogleOneVPN:
+    behavior: classical
+    format: text
+    url: "https://clashrules.chenzisu.workers.dev/GoogleOneVPN.list"
+    interval: 86400
+  GoogleFCM:
+    behavior: classical
+    format: text
+    url: "https://clashrules.chenzisu.workers.dev/GoogleFCM.list"
+    interval: 86400
+  Google:
+    behavior: classical
+    format: text
+    url: "https://clashrules.chenzisu.workers.dev/Google.list"
+    interval: 86400
+  PokemonTCGP:
+    behavior: classical
+    format: text
+    url: "https://clashrules.chenzisu.workers.dev/PokemonTCGP.list"
+    interval: 86400
+  PokemonChampions:
+    behavior: classical
+    format: text
+    url: "https://clashrules.chenzisu.workers.dev/PokemonChampions.list"
+    interval: 86400
+  PokemonGO:
+    behavior: classical
+    format: text
+    url: "https://clashrules.chenzisu.workers.dev/PokemonGO.list"
+    interval: 86400
+  Nintendo:
+    behavior: classical
+    format: text
+    url: "https://clashrules.chenzisu.workers.dev/Nintendo.list"
+    interval: 86400
+  Sony:
+    behavior: classical
+    format: text
+    url: "https://clashrules.chenzisu.workers.dev/Sony.list"
+    interval: 86400
+  PlayStation:
+    behavior: classical
+    format: text
+    url: "https://clashrules.chenzisu.workers.dev/PlayStation.list"
+    interval: 86400
+  Steam:
+    behavior: classical
+    format: text
+    url: "https://clashrules.chenzisu.workers.dev/Steam.list"
+    interval: 86400
+  ChinaDomain:
+    behavior: classical
+    format: text
+    url: "https://clashrules.chenzisu.workers.dev/ChinaDomain.list"
+    interval: 86400
+  ChinaCompanyIp:
+    behavior: classical
+    format: text
+    url: "https://clashrules.chenzisu.workers.dev/ChinaCompanyIp.list"
+    interval: 86400
+  Telegram:
+    behavior: classical
+    format: text
+    url: "https://clashrules.chenzisu.workers.dev/Telegram.list"
+    interval: 86400
+  Instagram:
+    behavior: classical
+    format: text
+    url: "https://clashrules.chenzisu.workers.dev/Instagram.list"
+    interval: 86400
+  WhatsApp:
+    behavior: classical
+    format: text
+    url: "https://clashrules.chenzisu.workers.dev/WhatsApp.list"
+    interval: 86400
+  Reddit:
+    behavior: classical
+    format: text
+    url: "https://clashrules.chenzisu.workers.dev/Reddit.list"
+    interval: 86400
+  LinkedIn:
+    behavior: classical
+    format: text
+    url: "https://clashrules.chenzisu.workers.dev/LinkedIn.list"
+    interval: 86400
+  Github:
+    behavior: classical
+    format: text
+    url: "https://clashrules.chenzisu.workers.dev/Github.list"
+    interval: 86400
+  Mikan:
+    behavior: classical
+    format: text
+    url: "https://clashrules.chenzisu.workers.dev/Mikan.list"
+    interval: 86400
+  Hitun:
+    behavior: classical
+    format: text
+    url: "https://clashrules.chenzisu.workers.dev/Hitun.list"
+    interval: 86400
+  ProxyGFWlist:
+    behavior: classical
+    format: text
+    url: "https://clashrules.chenzisu.workers.dev/ProxyGFWlist.list"
+    interval: 86400
+
+# 按原 INI 顺序匹配；AppleIntelligence 在通用 Apple 规则之前。
+rules:
+  - "RULE-SET,LocalAreaNetwork,🎯 Mainland"
+  - "RULE-SET,UnBan,🎯 Mainland"
+  - "RULE-SET,BanAD,🛑 Advertising"
+  - "RULE-SET,BanProgramAD,🛑 Advertising"
+  - "RULE-SET,BanEasyList,🛑 Advertising"
+  - "RULE-SET,BanEasyListChina,🛑 Advertising"
+  - "RULE-SET,ChinaMedia,🎯 Mainland"
+  - "RULE-SET,AI,💬 Intelligence"
+  - "RULE-SET,AppleIntelligence,💬 Intelligence"
+  - "RULE-SET,PayPal,💰 PayPal"
+  - "RULE-SET,Amazon,🛍️ Amazon"
+  - "RULE-SET,YouTube,📺 YouTube"
+  - "RULE-SET,DisneyPlus,📺 DisneyPlus"
+  - "RULE-SET,Netflix,📺 Netflix"
+  - "RULE-SET,AppleFitness,🏃 Apple Fitness"
+  - "RULE-SET,MyAppleTV,📺 Apple TV"
+  - "RULE-SET,AppleTV,📺 Apple TV"
+  - "RULE-SET,Apple,🍎 Apple"
+  - "RULE-SET,GoogleOneVPN,🌍 Google"
+  - "RULE-SET,GoogleFCM,🌍 Google"
+  - "RULE-SET,Google,🌍 Google"
+  - "RULE-SET,PokemonTCGP,🎮 Game"
+  - "RULE-SET,PokemonChampions,🎮 Game"
+  - "RULE-SET,PokemonGO,🎮 Game"
+  - "RULE-SET,Nintendo,🎮 Game"
+  - "RULE-SET,Sony,🎮 Game"
+  - "RULE-SET,PlayStation,🎮 Game"
+  - "RULE-SET,Steam,🎮 Game"
+  - "RULE-SET,ChinaDomain,🎯 Mainland"
+  - "RULE-SET,ChinaCompanyIp,🎯 Mainland"
+  - "RULE-SET,Telegram,🚀 Global"
+  - "RULE-SET,Instagram,🚀 Global"
+  - "RULE-SET,WhatsApp,🚀 Global"
+  - "RULE-SET,Reddit,🚀 Global"
+  - "RULE-SET,LinkedIn,🚀 Global"
+  - "RULE-SET,Github,🚀 Global"
+  - "DOMAIN-SUFFIX,ghcr.io,🚀 Global"
+  - "RULE-SET,Mikan,🚀 Global"
+  - "RULE-SET,Hitun,🚀 Global"
+  - "RULE-SET,ProxyGFWlist,🚀 Global"
+  - "GEOIP,CN,🎯 Mainland"
+  - "MATCH,🐟 Final"
