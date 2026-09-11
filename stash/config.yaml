@@ -1,5 +1,6 @@
 # Stash 原生拆分配置；不再交给 subconverter 合并规则。
-# 使用前：只在自己的本地副本替换下方订阅 URL，勿提交带 token 的链接。
+# 使用前：在 Stash 本地覆写中设置 proxy-providers.subscription.url。
+# 公共配置保留占位地址；真实订阅链接勿提交到仓库。
 # 订阅响应必须是包含 proxies: 的 YAML；其他格式需先仅转换节点。
 # 节点每小时更新，规则每天更新；策略组和匹配顺序在本文件维护。
 # 原 rule.ini 保留。规则地址沿用线上版本（可能与 ruleset/ 本地内容不同）。
@@ -10,41 +11,11 @@ mode: rule
 log-level: info
 ipv6: true
 
-# 按节点名称筛选：sg 新加坡、hk 香港、us 美国、tw 台湾、jp 日本。
-# game 为游戏专线；media 保留原流媒体组较窄的地区筛选条件。
+# 所有策略组共用一个订阅；各组通过 filter 按节点名称筛选。
 proxy-providers:
-  subscription-sg:
-    url: &subscription-url "https://example.invalid/REPLACE_WITH_YOUR_STASH_SUBSCRIPTION"
+  subscription:
+    url: "https://example.invalid/REPLACE_WITH_YOUR_STASH_SUBSCRIPTION"
     interval: 3600
-    filter: "^(?!.*(Game|游戏|IPLC)).*(新加坡|坡|狮城|SG|Singapore).*"
-  subscription-game:
-    url: *subscription-url
-    interval: 3600
-    filter: "(Game|游戏|IPLC)"
-  subscription-hk:
-    url: *subscription-url
-    interval: 3600
-    filter: "^(?!.*(Game|游戏|IPLC)).*(港|HK|hk|Hong Kong|HongKong|hongkong).*"
-  subscription-us:
-    url: *subscription-url
-    interval: 3600
-    filter: "^(?!.*(Game|游戏|IPLC)).*(美国|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States).*"
-  subscription-tw:
-    url: *subscription-url
-    interval: 3600
-    filter: "^(?!.*(Game|游戏|IPLC)).*(台|新北|彰化|TW|Taiwan).*"
-  subscription-jp:
-    url: *subscription-url
-    interval: 3600
-    filter: "^(?!.*(Game|游戏|IPLC)).*(日本|川日|东京|大阪|泉日|埼玉|沪日|深日|[^-]日|JP|Japan).*"
-  subscription-hk-media:
-    url: *subscription-url
-    interval: 3600
-    filter: "^(?!.*(Game|游戏|IPLC)).*(港|HK|Hong Kong).*"
-  subscription-tw-media:
-    url: *subscription-url
-    interval: 3600
-    filter: "^(?!.*(Game|游戏|IPLC)).*(台|TW|Taiwan).*"
 
 proxy-groups:
   - name: "🚀 Global"
@@ -61,9 +32,8 @@ proxy-groups:
     proxies:
       - "🇸🇬 Auto-SG"
     use:
-      - subscription-sg
-      # 加入美国单节点，便于固定出口对比“地区不可用”；默认仍为 Auto-SG。
-      - subscription-us
+      - subscription
+    filter: "(?:^(?!.*(Game|游戏|IPLC)).*(新加坡|坡|狮城|SG|Singapore).*)|(?:^(?!.*(Game|游戏|IPLC)).*(美国|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States).*)"
   - name: "🏃 Apple Fitness"
     type: select
     proxies:
@@ -102,7 +72,8 @@ proxy-groups:
       - "🚀 Global"
       - "DIRECT"
     use:
-      - subscription-game
+      - subscription
+    filter: "^(?:🚀 Global|DIRECT)$|(Game|游戏|IPLC)"
   - name: "💰 PayPal"
     type: select
     proxies:
@@ -147,49 +118,57 @@ proxy-groups:
   - name: "🇭🇰 Auto-HK"
     type: url-test
     use:
-      - subscription-hk
+      - subscription
+    filter: "^(?!.*(Game|游戏|IPLC)).*(港|HK|hk|Hong Kong|HongKong|hongkong).*"
     interval: 300
     lazy: true
   - name: "🇺🇲 Auto-US"
     type: url-test
     use:
-      - subscription-us
+      - subscription
+    filter: "^(?!.*(Game|游戏|IPLC)).*(美国|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States).*"
     interval: 300
     lazy: true
   - name: "🇨🇳 Auto-TW"
     type: url-test
     use:
-      - subscription-tw
+      - subscription
+    filter: "^(?!.*(Game|游戏|IPLC)).*(台|新北|彰化|TW|Taiwan).*"
     interval: 300
     lazy: true
   - name: "🇯🇵 Auto-JP"
     type: url-test
     use:
-      - subscription-jp
+      - subscription
+    filter: "^(?!.*(Game|游戏|IPLC)).*(日本|川日|东京|大阪|泉日|埼玉|沪日|深日|[^-]日|JP|Japan).*"
     interval: 300
     lazy: true
   - name: "🇸🇬 Auto-SG"
     type: url-test
     use:
-      - subscription-sg
+      - subscription
+    filter: "^(?!.*(Game|游戏|IPLC)).*(新加坡|坡|狮城|SG|Singapore).*"
     interval: 300
     lazy: true
   - name: "📺 YouTube-Smart"
     type: url-test
     use:
-      - subscription-hk-media
+      - subscription
+    filter: "^(?!.*(Game|游戏|IPLC)).*(港|HK|Hong Kong).*"
     interval: 1800
     lazy: true
   - name: "📺 Netflix-Smart"
     type: url-test
     use:
-      - subscription-hk-media
+      - subscription
+    filter: "^(?!.*(Game|游戏|IPLC)).*(港|HK|Hong Kong).*"
     interval: 1800
     lazy: true
   - name: "📺 DisneyPlus-Smart"
     type: url-test
     use:
-      - subscription-tw-media
+      - subscription
+    filter: "^(?!.*(Game|游戏|IPLC)).*(台|TW|Taiwan).*"
     interval: 1800
     lazy: true
 
