@@ -20,6 +20,8 @@ NAS 使用 Sub-Store Node.js、HTTP META，以及 `scripts/substore-media-check.
 Shadowrocket 的 `rule.conf`、Stash 的 `config.yaml` 和 `rule.ini` 中，YouTube-Smart 只筛选 `[YTP]` 香港候选，Netflix-Smart 只筛选 `[NF]` 香港候选。
 三组每 600 秒测速，公差 100 ms。ChatGPT-Smart 只包含带 `[GPT]` 标记的新加坡节点；Shadowrocket 和 Stash 的 Intelligence 都只交给这个子组。YouTube/Netflix 主组保留默认 Smart 组及手动 Global 选项。
 
+YouTube-Smart 使用 `https://www.youtube.com/generate_204` 检查当前 YouTube 连通性，避免仅凭 Google 的测速结果选节点。Shadowrocket 的 YouTube 父组显式默认选择 YouTube-Smart。该检测不包含视频流播放验证。
+
 NAS 沿用三条每小时错峰处理任务；GPT 和媒体检测各自缓存 50 分钟。
 Gist 产物每小时整点同步。客户端更新订阅后才能获取新标签；缓存到期时拉取可能等待一次重新检测。
 DisneyPlus 规则、组及 Stash 提供器已注释。
