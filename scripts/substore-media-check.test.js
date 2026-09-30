@@ -1,0 +1,12 @@
+const vm=require('vm'),fs=require('fs'),assert=require('assert');
+const ctx={$arguments:{cache:true},$substore:{},ProxyUtils:{produce:p=>p},scriptResourceCache:{get:()=>({ytp:true,ytpRegion:'HK',nf:true})}};vm.createContext(ctx);vm.runInContext(fs.readFileSync('scripts/substore-media-check.js','utf8'),ctx);
+const page=(text,region='HK')=>'"INNERTUBE_CONTEXT_GL":"'+region+'"; var ytInitialData = '+JSON.stringify({offer:{text,escaped:'braces } and "quotes"'}})+'; irrelevant shared captcha scripts';
+assert(ctx.classifyYouTube({status:200,body:page('ad-free videos')}).ok);
+assert(!ctx.classifyYouTube({status:200,body:page('ad-free Premium is not available in your country')}).ok);
+assert(!ctx.classifyYouTube({status:403,body:page('ad-free')}).ok);
+assert(!ctx.classifyYouTube({status:200,body:'"INNERTUBE_CONTEXT_GL":"HK" ad-free'}).ok);
+assert(ctx.classifyYouTube({status:200,body:page('ad-free')+' unrelated Premium is not available in your country'}).ok);
+assert(ctx.classifyNetflix({status:200,body:'<meta property="og:title" content="Watch Breaking Bad | Netflix"> 70143836 captcha library'},70143836).ok);
+assert(!ctx.classifyNetflix({status:200,body:'<meta property="og:title" content="Netflix"> 70143836 Oh no!'},70143836).ok);
+assert(!ctx.classifyNetflix({status:200,body:'<meta property="og:title" content="Watch Breaking Bad | Netflix"> 70143836 proxy or unblocker'},70143836).ok);
+(async()=>{const proxies=[{name:'[GPT] 香港 HK 01',type:'ss'},{name:'[GPT] 新加坡 SG 01',type:'ss'}];await ctx.operator(proxies);assert(proxies[0].name==='[GPT] [YTP] [NF] 香港 HK 01');assert(proxies[1].name==='[GPT] 新加坡 SG 01');await ctx.operator(proxies);assert(proxies[0].name==='[GPT] [YTP] [NF] 香港 HK 01');const sg=/^\[GPT\].*(新加坡|坡|狮城|[Ss][Gg]|[Ss]ingapore)/;assert(!sg.test(proxies[0].name)&&sg.test(proxies[1].name));console.log('classifier blocking, rendered-data parsing, marker stability and GPT Singapore isolation passed')})().catch(e=>{console.error(e);process.exitCode=1});

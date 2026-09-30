@@ -28,15 +28,13 @@ proxy-groups:
       - "🇸🇬 Auto-SG"
       - "DIRECT"
   - name: "💬 Intelligence"
-    type: url-test
+    type: select
+    proxies:
+      - "💬 ChatGPT-Smart"
     use:
       - subscription
-    # 只选择通过 iOS ChatGPT 预检的新加坡节点。
-    filter: '^\[GPT\].*(新加坡|坡|狮城|[Ss][Gg]|[Ss]ingapore)'
-    url: "http://www.gstatic.com/generate_204"
-    interval: 600
-    tolerance: 100
-    lazy: true
+    # 手动候选也只包含通过 GPT 预检的新加坡节点。
+    filter: '^(?:💬 ChatGPT-Smart|\[GPT\].*(新加坡|坡|狮城|[Ss][Gg]|[Ss]ingapore))'
   - name: "🏃 Apple Fitness"
     type: select
     proxies:
@@ -98,11 +96,11 @@ proxy-groups:
     proxies:
       - "📺 Netflix-Smart"
       - "🚀 Global"
-  - name: "📺 DisneyPlus"
-    type: select
-    proxies:
-      - "📺 DisneyPlus-Smart"
-      - "🚀 Global"
+#   - name: "📺 DisneyPlus"
+#     type: select
+#     proxies:
+#       - "📺 DisneyPlus-Smart"
+#       - "🚀 Global"
   - name: "🎯 Mainland"
     type: select
     proxies:
@@ -153,27 +151,42 @@ proxy-groups:
     filter: "^(?!.*(Game|游戏|IPLC)).*(新加坡|坡|狮城|SG|Singapore).*"
     interval: 300
     lazy: true
+  - name: "💬 ChatGPT-Smart"
+    type: url-test
+    use:
+      - subscription
+    filter: '^\[GPT\].*(新加坡|坡|狮城|[Ss][Gg]|[Ss]ingapore)'
+    url: "http://www.gstatic.com/generate_204"
+    interval: 600
+    tolerance: 100
+    lazy: true
   - name: "📺 YouTube-Smart"
     type: url-test
     use:
       - subscription
-    filter: "^(?!.*(Game|游戏|IPLC)).*(港|HK|Hong Kong).*"
-    interval: 1800
+    filter: '\[YTP\].*(港|[Hh][Kk]|[Hh]ong ?[Kk]ong)'
+    url: "http://www.gstatic.com/generate_204"
+    interval: 600
+    tolerance: 100
     lazy: true
+
   - name: "📺 Netflix-Smart"
     type: url-test
     use:
       - subscription
-    filter: "^(?!.*(Game|游戏|IPLC)).*(港|HK|Hong Kong).*"
-    interval: 1800
+    filter: '\[NF\].*(港|[Hh][Kk]|[Hh]ong ?[Kk]ong)'
+    url: "http://www.gstatic.com/generate_204"
+    interval: 600
+    tolerance: 100
     lazy: true
-  - name: "📺 DisneyPlus-Smart"
-    type: url-test
-    use:
-      - subscription
-    filter: "^(?!.*(Game|游戏|IPLC)).*(台|TW|Taiwan).*"
-    interval: 1800
-    lazy: true
+
+#   - name: "📺 DisneyPlus-Smart"
+#     type: url-test
+#     use:
+#       - subscription
+#     filter: "^(?!.*(Game|游戏|IPLC)).*(台|TW|Taiwan).*"
+#     interval: 1800
+#     lazy: true
 
 rule-providers:
   LocalAreaNetwork:
@@ -236,11 +249,11 @@ rule-providers:
     format: text
     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTube.list"
     interval: 86400
-  DisneyPlus:
-    behavior: classical
-    format: text
-    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/DisneyPlus.list"
-    interval: 86400
+#   DisneyPlus:
+#     behavior: classical
+#     format: text
+#     url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/DisneyPlus.list"
+#     interval: 86400
   Netflix:
     behavior: classical
     format: text
@@ -394,7 +407,7 @@ rules:
   - "RULE-SET,PayPal,💰 PayPal"
   - "RULE-SET,Amazon,🛍️ Amazon"
   - "RULE-SET,YouTube,📺 YouTube"
-  - "RULE-SET,DisneyPlus,📺 DisneyPlus"
+#   - "RULE-SET,DisneyPlus,📺 DisneyPlus"
   - "RULE-SET,Netflix,📺 Netflix"
   - "RULE-SET,PokemonTCGP,🎮 Game"
   - "RULE-SET,PokemonChampions,🎮 Game"
