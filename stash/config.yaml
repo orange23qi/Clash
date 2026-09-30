@@ -3,7 +3,7 @@
 # 公共配置保留占位地址；真实订阅链接勿提交到仓库。
 # 订阅响应必须是包含 proxies: 的 YAML；其他格式需先仅转换节点。
 # 节点每小时更新，规则每天更新；策略组和匹配顺序在本文件维护。
-# 原 rule.ini 保留。规则地址沿用线上版本（可能与 ruleset/ 本地内容不同）。
+# 原 rule.ini 保留。规则直接读取 GitHub 原始地址（可能与 ruleset/ 本地内容不同）。
 # Stash 空代理集/空策略组会按 DIRECT 处理；导入后务必检查各地区有节点。
 # 地区筛选保留原有正则（含负向前瞻），需在实际 Stash 版本确认筛选结果。
 # Stash 节点测速结果跨组共享，原 Smart 组不代表流媒体解锁检测。
@@ -179,197 +179,197 @@ rule-providers:
   LocalAreaNetwork:
     behavior: classical
     format: text
-    url: "https://clashrules.chenzisu.workers.dev/LocalAreaNetwork.list"
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/LocalAreaNetwork.list"
     interval: 86400
   UnBan:
     behavior: classical
     format: text
-    url: "https://clashrules.chenzisu.workers.dev/UnBan.list"
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/UnBan.list"
     interval: 86400
   BanAD:
     behavior: classical
     format: text
-    url: "https://clashrules.chenzisu.workers.dev/BanAD.list"
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list"
     interval: 86400
   BanProgramAD:
     behavior: classical
     format: text
-    url: "https://clashrules.chenzisu.workers.dev/BanProgramAD.list"
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanProgramAD.list"
     interval: 86400
   BanEasyList:
     behavior: classical
     format: text
-    url: "https://clashrules.chenzisu.workers.dev/BanEasyList.list"
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanEasyList.list"
     interval: 86400
   BanEasyListChina:
     behavior: classical
     format: text
-    url: "https://clashrules.chenzisu.workers.dev/BanEasyListChina.list"
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanEasyListChina.list"
     interval: 86400
   ChinaMedia:
     behavior: classical
     format: text
-    url: "https://clashrules.chenzisu.workers.dev/ChinaMedia.list"
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/ChinaMedia.list"
     interval: 86400
   AI:
     behavior: classical
     format: text
-    url: "https://clashrules.chenzisu.workers.dev/AI.list"
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/AI.list"
     interval: 86400
   AppleIntelligence:
     behavior: classical
     format: text
-    url: "https://clashrules.chenzisu.workers.dev/AppleIntelligence.list"
+    url: "https://raw.githubusercontent.com/RocM301/Apple-Rule/refs/heads/main/Apple-AI.list"
     interval: 86400
   PayPal:
     behavior: classical
     format: text
-    url: "https://clashrules.chenzisu.workers.dev/PayPal.list"
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/PayPal/PayPal.list"
     interval: 86400
   Amazon:
     behavior: classical
     format: text
-    url: "https://clashrules.chenzisu.workers.dev/Amazon.list"
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Amazon/Amazon.list"
     interval: 86400
   YouTube:
     behavior: classical
     format: text
-    url: "https://clashrules.chenzisu.workers.dev/YouTube.list"
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTube.list"
     interval: 86400
   DisneyPlus:
     behavior: classical
     format: text
-    url: "https://clashrules.chenzisu.workers.dev/DisneyPlus.list"
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/DisneyPlus.list"
     interval: 86400
   Netflix:
     behavior: classical
     format: text
-    url: "https://clashrules.chenzisu.workers.dev/Netflix.list"
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Netflix.list"
     interval: 86400
   AppleFitness:
     behavior: classical
     format: text
-    url: "https://clashrules.chenzisu.workers.dev/AppleFitness.list"
+    url: "https://raw.githubusercontent.com/orange23qi/Clash/refs/heads/main/ruleset/AppleFitness.list"
     interval: 86400
   MyAppleTV:
     behavior: classical
     format: text
-    url: "https://clashrules.chenzisu.workers.dev/MyAppleTV.list"
+    url: "https://raw.githubusercontent.com/orange23qi/Clash/refs/heads/main/ruleset/AppleTV.list"
     interval: 86400
   AppleTV:
     behavior: classical
     format: text
-    url: "https://clashrules.chenzisu.workers.dev/AppleTV.list"
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/AppleTV.list"
     interval: 86400
   Apple:
     behavior: classical
     format: text
-    url: "https://clashrules.chenzisu.workers.dev/Apple.list"
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Apple.list"
     interval: 86400
   GoogleOneVPN:
     behavior: classical
     format: text
-    url: "https://clashrules.chenzisu.workers.dev/GoogleOneVPN.list"
+    url: "https://raw.githubusercontent.com/orange23qi/Clash/main/ruleset/GoogleOneVPN.list"
     interval: 86400
   GoogleFCM:
     behavior: classical
     format: text
-    url: "https://clashrules.chenzisu.workers.dev/GoogleFCM.list"
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/GoogleFCM.list"
     interval: 86400
   Google:
     behavior: classical
     format: text
-    url: "https://clashrules.chenzisu.workers.dev/Google.list"
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Google.list"
     interval: 86400
   PokemonTCGP:
     behavior: classical
     format: text
-    url: "https://clashrules.chenzisu.workers.dev/PokemonTCGP.list"
+    url: "https://raw.githubusercontent.com/orange23qi/Clash/refs/heads/main/ruleset/PokemonTCGP.list"
     interval: 86400
   PokemonChampions:
     behavior: classical
     format: text
-    url: "https://clashrules.chenzisu.workers.dev/PokemonChampions.list"
+    url: "https://raw.githubusercontent.com/orange23qi/Clash/refs/heads/main/ruleset/PokemonChampions.list"
     interval: 86400
   PokemonGO:
     behavior: classical
     format: text
-    url: "https://clashrules.chenzisu.workers.dev/PokemonGO.list"
+    url: "https://raw.githubusercontent.com/orange23qi/Clash/refs/heads/main/ruleset/PokemonGO.list"
     interval: 86400
   Nintendo:
     behavior: classical
     format: text
-    url: "https://clashrules.chenzisu.workers.dev/Nintendo.list"
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Nintendo/Nintendo.list"
     interval: 86400
   Sony:
     behavior: classical
     format: text
-    url: "https://clashrules.chenzisu.workers.dev/Sony.list"
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Sony/Sony.list"
     interval: 86400
   PlayStation:
     behavior: classical
     format: text
-    url: "https://clashrules.chenzisu.workers.dev/PlayStation.list"
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/PlayStation/PlayStation.list"
     interval: 86400
   Steam:
     behavior: classical
     format: text
-    url: "https://clashrules.chenzisu.workers.dev/Steam.list"
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Steam/Steam.list"
     interval: 86400
   ChinaDomain:
     behavior: classical
     format: text
-    url: "https://clashrules.chenzisu.workers.dev/ChinaDomain.list"
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaDomain.list"
     interval: 86400
   ChinaCompanyIp:
     behavior: classical
     format: text
-    url: "https://clashrules.chenzisu.workers.dev/ChinaCompanyIp.list"
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaCompanyIp.list"
     interval: 86400
   Telegram:
     behavior: classical
     format: text
-    url: "https://clashrules.chenzisu.workers.dev/Telegram.list"
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Telegram.list"
     interval: 86400
   Instagram:
     behavior: classical
     format: text
-    url: "https://clashrules.chenzisu.workers.dev/Instagram.list"
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Instagram/Instagram.list"
     interval: 86400
   WhatsApp:
     behavior: classical
     format: text
-    url: "https://clashrules.chenzisu.workers.dev/WhatsApp.list"
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Whatsapp.list"
     interval: 86400
   Reddit:
     behavior: classical
     format: text
-    url: "https://clashrules.chenzisu.workers.dev/Reddit.list"
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Reddit.list"
     interval: 86400
   LinkedIn:
     behavior: classical
     format: text
-    url: "https://clashrules.chenzisu.workers.dev/LinkedIn.list"
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/LinkedIn/LinkedIn.list"
     interval: 86400
   Github:
     behavior: classical
     format: text
-    url: "https://clashrules.chenzisu.workers.dev/Github.list"
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Github.list"
     interval: 86400
   Mikan:
     behavior: classical
     format: text
-    url: "https://clashrules.chenzisu.workers.dev/Mikan.list"
+    url: "https://raw.githubusercontent.com/orange23qi/Clash/refs/heads/main/ruleset/Mikanani.list"
     interval: 86400
   Hitun:
     behavior: classical
     format: text
-    url: "https://clashrules.chenzisu.workers.dev/Hitun.list"
+    url: "https://raw.githubusercontent.com/orange23qi/Clash/refs/heads/main/ruleset/Hitun.list"
     interval: 86400
   ProxyGFWlist:
     behavior: classical
     format: text
-    url: "https://clashrules.chenzisu.workers.dev/ProxyGFWlist.list"
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list"
     interval: 86400
 
 # 先匹配的规则优先：基础/广告 -> Apple Intelligence -> 国际服务 -> Apple 服务 -> 国内 -> 兜底。
