@@ -31,10 +31,6 @@ proxy-groups:
     type: select
     proxies:
       - "💬 ChatGPT-Smart"
-    use:
-      - subscription
-    # 手动候选也只包含通过 GPT 预检的新加坡节点。
-    filter: '^(?:💬 ChatGPT-Smart|\[GPT\].*(新加坡|坡|狮城|[Ss][Gg]|[Ss]ingapore))'
   - name: "🏃 Apple Fitness"
     type: select
     proxies:
@@ -72,9 +68,12 @@ proxy-groups:
     proxies:
       - "🚀 Global"
       - "DIRECT"
+      - "🎮 Game-Nodes"
+  - name: "🎮 Game-Nodes"
+    type: select
     use:
       - subscription
-    filter: "^(?:🚀 Global|DIRECT)$|(Game|游戏|IPLC)"
+    filter: "(Game|游戏|IPLC)"
   - name: "💰 PayPal"
     type: select
     proxies:
@@ -83,8 +82,8 @@ proxy-groups:
   - name: "🛍️ Amazon"
     type: select
     proxies:
-      - "🇺🇲 Auto-US"
       - "🇯🇵 Auto-JP"
+      - "🇺🇲 Auto-US"
       - "DIRECT"
   - name: "📺 YouTube"
     type: select
@@ -114,8 +113,8 @@ proxy-groups:
   - name: "🐟 Final"
     type: select
     proxies:
-      - "🚀 Global"
       - "DIRECT"
+      - "🚀 Global"
   - name: "🇭🇰 Auto-HK"
     type: url-test
     use:
