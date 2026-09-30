@@ -28,12 +28,15 @@ proxy-groups:
       - "🇸🇬 Auto-SG"
       - "DIRECT"
   - name: "💬 Intelligence"
-    type: select
-    proxies:
-      - "🇸🇬 Auto-SG"
+    type: url-test
     use:
       - subscription
-    filter: "(?:^(?!.*(Game|游戏|IPLC)).*(新加坡|坡|狮城|SG|Singapore).*)|(?:^(?!.*(Game|游戏|IPLC)).*(美国|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States).*)"
+    # 只选择通过 iOS ChatGPT 预检的新加坡节点。
+    filter: '^\[GPT\].*(新加坡|坡|狮城|[Ss][Gg]|[Ss]ingapore)'
+    url: "http://www.gstatic.com/generate_204"
+    interval: 600
+    tolerance: 100
+    lazy: true
   - name: "🏃 Apple Fitness"
     type: select
     proxies:
