@@ -401,6 +401,7 @@ rules:
   - "RULE-SET,LinkedIn,🚀 Global"
   - "RULE-SET,Github,🚀 Global"
   - "DOMAIN-SUFFIX,ghcr.io,🚀 Global"
+  - "DOMAIN-SUFFIX,linux.do,🚀 Global"
   - "RULE-SET,Mikan,🚀 Global"
   - "RULE-SET,Hitun,🚀 Global"
   - "RULE-SET,PayPal,💰 PayPal"
