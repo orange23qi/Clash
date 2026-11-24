@@ -268,6 +268,10 @@ proxy-groups:
       - 🇯🇵 Auto-JP
       - 🇺🇲 Auto-US
       - DIRECT
+  - name: "✨ Gemini"
+    type: select
+    use:
+      - Provide-Gemini
   - name: OpenAI
     type: select
     proxies:
@@ -388,6 +392,11 @@ proxy-groups:
       - 🇺🇲 Auto-US
 
 proxy-providers:
+  "Provide-Gemini":
+    type: file
+    path: ./provide/subscription.yaml
+    filter: '.* \[Gemini\]$'
+
   "Provide-HK":
     type: file
     path: ./provide/subscription.yaml
@@ -701,6 +710,12 @@ rule-providers:
     # youshit: network == 'udp' and ('youtube' in host or 'googlevideo' in host)
 
 rules:
+  - "DOMAIN-SUFFIX,gemini.google.com,✨ Gemini"
+  - "DOMAIN-SUFFIX,bard.google.com,✨ Gemini"
+  - "DOMAIN-SUFFIX,generativelanguage.googleapis.com,✨ Gemini"
+  - "DOMAIN-SUFFIX,geminiweb-pa.clients.google.com,✨ Gemini"
+  - "DOMAIN-SUFFIX,geminiweb-pa.clients6.google.com,✨ Gemini"
+  - "DOMAIN-SUFFIX,gemini.gstatic.com,✨ Gemini"
   ## block ads
   # - DOMAIN-SUFFIX,googlesyndication.com,PROXY
   # - AND,((GEOSITE,category-ads-all),(NOT,((DOMAIN-SUFFIX,googlesyndication.com)))),REJECT

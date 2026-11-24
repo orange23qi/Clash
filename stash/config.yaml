@@ -27,6 +27,11 @@ proxy-groups:
       - "🇯🇵 Auto-JP"
       - "🇸🇬 Auto-SG"
       - "DIRECT"
+  - name: "✨ Gemini"
+    type: select
+    use:
+      - subscription
+    filter: '.* \[Gemini\]$'
   - name: "💬 Intelligence"
     type: select
     proxies:
@@ -386,6 +391,12 @@ rule-providers:
 
 # 先匹配的规则优先：基础/广告 -> Apple Intelligence -> 国际服务 -> Apple 服务 -> 国内 -> 兜底。
 rules:
+  - "DOMAIN-SUFFIX,gemini.google.com,✨ Gemini"
+  - "DOMAIN-SUFFIX,bard.google.com,✨ Gemini"
+  - "DOMAIN-SUFFIX,generativelanguage.googleapis.com,✨ Gemini"
+  - "DOMAIN-SUFFIX,geminiweb-pa.clients.google.com,✨ Gemini"
+  - "DOMAIN-SUFFIX,geminiweb-pa.clients6.google.com,✨ Gemini"
+  - "DOMAIN-SUFFIX,gemini.gstatic.com,✨ Gemini"
   - "RULE-SET,LocalAreaNetwork,🎯 Mainland"
   - "RULE-SET,UnBan,🎯 Mainland"
   - "RULE-SET,BanAD,🛑 Advertising"
