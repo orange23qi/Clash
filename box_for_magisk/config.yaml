@@ -723,6 +723,7 @@ rule-providers:
     # youshit: network == 'udp' and ('youtube' in host or 'googlevideo' in host)
 
 rules:
+  - "DOMAIN,robinfrontend-pa.googleapis.com,✨ Gemini"
   - "DOMAIN-SUFFIX,gemini.google.com,✨ Gemini"
   - "DOMAIN-SUFFIX,bard.google.com,✨ Gemini"
   - "DOMAIN-SUFFIX,generativelanguage.googleapis.com,✨ Gemini"
