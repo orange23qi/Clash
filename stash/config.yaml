@@ -29,9 +29,16 @@ proxy-groups:
       - "DIRECT"
   - name: "✨ Gemini"
     type: select
+    proxies: ["✨ Gemini-Smart"]
+  - name: "✨ Gemini-Smart"
+    type: url-test
+    url: "http://www.gstatic.com/generate_204"
+    interval: 600
+    tolerance: 100
+    lazy: true
     use:
       - subscription
-    filter: '.* \[Gemini\]$'
+    filter: '\[(GEM|Gemini)\].*(美国|美國|🇺🇸|United States|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|(^|[^A-Za-z])[Uu][Ss][Aa]?([^A-Za-z]|$))|(美国|美國|🇺🇸|United States|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|(^|[^A-Za-z])[Uu][Ss][Aa]?([^A-Za-z]|$)).*\[(GEM|Gemini)\]'
   - name: "💬 Intelligence"
     type: select
     proxies:
@@ -73,9 +80,6 @@ proxy-groups:
     proxies:
       - "🚀 Global"
       - "DIRECT"
-      - "🎮 Game-Nodes"
-  - name: "🎮 Game-Nodes"
-    type: select
     use:
       - subscription
     filter: "(Game|游戏|IPLC)"
@@ -397,6 +401,7 @@ rules:
   - "DOMAIN-SUFFIX,geminiweb-pa.clients.google.com,✨ Gemini"
   - "DOMAIN-SUFFIX,geminiweb-pa.clients6.google.com,✨ Gemini"
   - "DOMAIN-SUFFIX,gemini.gstatic.com,✨ Gemini"
+  - "DOMAIN,daily-cloudcode-pa.googleapis.com,🌍 Google"
   - "RULE-SET,LocalAreaNetwork,🎯 Mainland"
   - "RULE-SET,UnBan,🎯 Mainland"
   - "RULE-SET,BanAD,🛑 Advertising"

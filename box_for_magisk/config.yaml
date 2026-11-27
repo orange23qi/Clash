@@ -270,6 +270,13 @@ proxy-groups:
       - DIRECT
   - name: "✨ Gemini"
     type: select
+    proxies: ["✨ Gemini-Smart"]
+  - name: "✨ Gemini-Smart"
+    type: url-test
+    url: "http://www.gstatic.com/generate_204"
+    interval: 600
+    tolerance: 100
+    lazy: true
     use:
       - Provide-Gemini
   - name: OpenAI
@@ -288,6 +295,7 @@ proxy-groups:
       - 🇺🇲 US
   - name: Game
     type: select
+    use: [Provide-Game]
     proxies:
       - DIRECT
       - Global
@@ -392,10 +400,15 @@ proxy-groups:
       - 🇺🇲 Auto-US
 
 proxy-providers:
+  "Provide-Game":
+    type: file
+    path: ./provide/subscription.yaml
+    filter: "(Game|游戏|IPLC)"
+
   "Provide-Gemini":
     type: file
     path: ./provide/subscription.yaml
-    filter: '.* \[Gemini\]$'
+    filter: '\[(GEM|Gemini)\].*(美国|美國|🇺🇸|United States|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|(^|[^A-Za-z])[Uu][Ss][Aa]?([^A-Za-z]|$))|(美国|美國|🇺🇸|United States|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|(^|[^A-Za-z])[Uu][Ss][Aa]?([^A-Za-z]|$)).*\[(GEM|Gemini)\]'
 
   "Provide-HK":
     type: file
@@ -716,6 +729,7 @@ rules:
   - "DOMAIN-SUFFIX,geminiweb-pa.clients.google.com,✨ Gemini"
   - "DOMAIN-SUFFIX,geminiweb-pa.clients6.google.com,✨ Gemini"
   - "DOMAIN-SUFFIX,gemini.gstatic.com,✨ Gemini"
+  - "DOMAIN,daily-cloudcode-pa.googleapis.com,Google"
   ## block ads
   # - DOMAIN-SUFFIX,googlesyndication.com,PROXY
   # - AND,((GEOSITE,category-ads-all),(NOT,((DOMAIN-SUFFIX,googlesyndication.com)))),REJECT
